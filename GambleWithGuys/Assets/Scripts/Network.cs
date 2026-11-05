@@ -5,7 +5,7 @@ using UnityEngine;
 public class Network : MonoBehaviour
 {
     // Tady bude zadávat Client IP adresu Hosta
-    private string ipAddress = "172.20.10.2";
+    private string ipAddress = " 10.107.184.87";
     private ushort port = 7777;
 
     private void OnGUI()
@@ -22,23 +22,21 @@ public class Network : MonoBehaviour
             if (GUILayout.Button("Host (Založit hru)"))
             {
                 var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
-                if (transport != null)
-                {
-                    // Host naslouchá na 0.0.0.0, aby nikdy nenastala chyba socketu
-                    transport.SetConnectionData("127.0.0.1", port, "0.0.0.0");
-                }
-                NetworkManager.Singleton.StartHost();
+
+                transport.SetConnectionData("127.0.0.1", port, "0.0.0.0");
+
+                bool started = NetworkManager.Singleton.StartHost();
+                Debug.Log("StartHost: " + started);
             }
 
             if (GUILayout.Button("Client (Připojit se)"))
             {
                 var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
-                if (transport != null)
-                {
-                    // Client se připojuje na adresu zadanou v textovém poli
-                    transport.SetConnectionData(ipAddress, port);
-                }
-                NetworkManager.Singleton.StartClient();
+
+                transport.SetConnectionData(ipAddress, port);
+
+                bool started = NetworkManager.Singleton.StartClient();
+                Debug.Log("StartClient: " + started);
             }
         }
 
