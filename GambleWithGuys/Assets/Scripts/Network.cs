@@ -5,7 +5,7 @@ using UnityEngine;
 public class Network : MonoBehaviour
 {
     // Tady bude zadávat Client IP adresu Hosta
-    private string ipAddress = "10.2.101.32";
+    private string ipAddress = "172.20.10.2";
     private ushort port = 7777;
 
     private void OnGUI()
